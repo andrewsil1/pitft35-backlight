@@ -1,0 +1,39 @@
+PiTftDpms: A utility for the Adafruit PiTft 3.5" resistive touchscreen
+
+Dependencies:
+You will need to install the "libXext-dev" package so that the required
+headers will be available when compiling the source, and of course you will
+also need a C compiler. In all likelihood, your system probably already has
+gcc on it.
+
+For example: "sudo apt install libXext-dev"
+
+To build the executable, run the following command line in this directory:
+gcc PiTftDpms.c -lX11 -lXext -o PiTftDpms
+
+This should produce the PiTftDpms executable in this directory.
+
+To run it from the command line to test it out, use the following command:
+"sudo DISPLAY=:0.0 ./PiTftDpms &"
+This will launch the tool as a background process and return to the
+command line.  What you should see is that when the X Windows screensaver
+kicks in, the utility will notice the change in state and will shut off
+the PiTft backlight at the same time.  By the same token, if you then touch
+the screen to wake it back up, the backlight will be turned back on.
+That's it!
+
+Limitations:
+- The utility only knows how to listen the the X Windows DPMS extension
+  for display power management.  If X Windows isn't running, or the X Windows
+  screen saver function is disabled, then the utility will exit when you 
+  launch it, or will simply do nothing.  If you are using the PiTft with some
+  other kind of application (e.g. omxplayer), no backlight control will
+  take place.
+- Launching the utility automatically at system startup, via systemd, or
+  through the Octoprint TouchUI startup scripts, is left as an exercise for
+  the reader (for now.)
+
+Issues may be submitted to the project via:
+ https://github.com/andrewsil1/pitft35-backlight
+
+
