@@ -1,0 +1,15 @@
+[Unit]
+Description=Start PiTftDpms screen saver state monitor
+After=touchui.service
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+ExecStart=/home/pi/pitft35-backlight/PiTftDpms
+Restart=always
+RestartSec=10s
+KillMode=process
+TimeoutSec=infinity
+
+[Install]
+WantedBy=graphical.target
